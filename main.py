@@ -5,8 +5,8 @@ processed_rows = []
 
 
 INPUT_FILE = "C:/Users/Rajmond/Desktop/Programozás/Gyakorlás/In progress/Employee_Attendance_Analyzer/input/attendance.csv"
-OUTPUT_CSV_FILE = "statuses.csv"
-OUTPUT_JSON_FILE = "overtime_employees.json"
+OUTPUT_CSV_FILE = "C:/Users/Rajmond/Desktop/Programozás/Gyakorlás/In progress/Employee_Attendance_Analyzer/output/statuses.csv"
+OUTPUT_JSON_FILE = "C:/Users/Rajmond/Desktop/Programozás/Gyakorlás/In progress/Employee_Attendance_Analyzer/output/overtime_employees.json"
 
 def get_status(hours_worked):
     if hours_worked < 8:
@@ -31,4 +31,6 @@ with open(INPUT_FILE, "r") as file:
             "hours_worked": hours,
             "status": status
         })
+
+
 
