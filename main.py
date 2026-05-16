@@ -32,5 +32,16 @@ with open(INPUT_FILE, "r") as file:
             "status": status
         })
 
+with open(OUTPUT_CSV_FILE, "w", newline="") as file:
+    writer = csv.DictWriter(
+        file, 
+        fieldnames = [
+            "employee_name",
+            "hours_worked",
+            "status"
+        ]
+    )
+    writer.writeheader()
 
-
+    writer.writerows(processed_rows)
+    
