@@ -57,4 +57,8 @@ with open(OUTPUT_CSV_FILE, "r") as file:
                 "hours_worked": row["hours_worked"]
             })
 
+with open(OUTPUT_JSON_FILE, "w", encoding = "utf-8") as file:
+    json.dump(overtimes, file, indent=4)
+
+    
 
