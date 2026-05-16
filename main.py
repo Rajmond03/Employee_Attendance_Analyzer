@@ -2,6 +2,7 @@ import csv
 import json
 
 processed_rows = []
+overtimes = []
 
 
 INPUT_FILE = "C:/Users/Rajmond/Desktop/Programozás/Gyakorlás/In progress/Employee_Attendance_Analyzer/input/attendance.csv"
@@ -44,4 +45,16 @@ with open(OUTPUT_CSV_FILE, "w", newline="") as file:
     writer.writeheader()
 
     writer.writerows(processed_rows)
+
+with open(OUTPUT_CSV_FILE, "r") as file:
+    reader = csv.DictReader(file)
+
+    for row in reader:
     
+        if row["status"] == "overtime":
+            overtimes.append({
+                "employee_name": row["employee_name"],
+                "hours_worked": row["hours_worked"]
+            })
+
+
