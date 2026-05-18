@@ -19,21 +19,35 @@ def get_status(hours_worked):
     else:
         return "overtime"
     
+try:
     
-with open(INPUT_FILE, "r") as file:
-    reader = csv.DictReader(file)
+    with open(INPUT_FILE, "r") as file:
+        reader = csv.DictReader(file)
 
-    for row in reader:
-        hours = float(row["hours_worked"])
+        for row in reader:
+            try:
 
-        status = get_status(hours)
+                hours = float(row["hours_worked"])
+            except ValueError:
 
-        processed_rows.append({
-            "employee_name": row["employee_name"],
-            "hours_worked": hours,
-            "status": status
-        })
+                print(
+                    f"invalid hours value: "
+                    f"{row['hours_worked']}"
+                )
+                continue
 
+            status = get_status(hours)
+
+            processed_rows.append({
+                "employee_name": row["employee_name"],
+                "hours_worked": hours,
+                "status": status
+            })
+except FileNotFoundError:
+    print(f"File not found: {INPUT_FILE}")
+
+    exit()
+    
 with open(OUTPUT_CSV_FILE, "w", newline="") as file:
     writer = csv.DictWriter(
         file, 
