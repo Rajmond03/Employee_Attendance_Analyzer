@@ -2,7 +2,7 @@ import csv
 import json
 
 processed_rows = []
-overtimes = []
+overtimes = {}
 
 
 INPUT_FILE = "C:/Users/Rajmond/Desktop/Programozás/Gyakorlás/In progress/Employee_Attendance_Analyzer/input/attendance.csv"
@@ -18,6 +18,7 @@ def get_status(hours_worked):
 
     else:
         return "overtime"
+    
     
 with open(INPUT_FILE, "r") as file:
     reader = csv.DictReader(file)
@@ -50,15 +51,24 @@ with open(OUTPUT_CSV_FILE, "r") as file:
     reader = csv.DictReader(file)
 
     for row in reader:
-    
+
+        hours_worked = float(row["hours_worked"])
+
         if row["status"] == "overtime":
-            overtimes.append({
-                "employee_name": row["employee_name"],
-                "hours_worked": row["hours_worked"]
-            })
+
+            overtime_hours = hours_worked - 8   
+            
+            employee_name = row["employee_name"]
+            
+            if employee_name in overtimes:
+                overtimes[employee_name] += overtime_hours
+
+            else:
+                overtimes[employee_name] = overtime_hours
+
 
 with open(OUTPUT_JSON_FILE, "w", encoding = "utf-8") as file:
     json.dump(overtimes, file, indent=4)
 
-    
+
 
